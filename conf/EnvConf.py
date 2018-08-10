@@ -1,7 +1,9 @@
 # -*- coding:utf8 -*-
-# creat by pengcheng
+# create by pengcheng
 
 class SysConf(object):
     browser = "chrome"
+    env = "qa"
+    envlist = ["qa","yz","prod"]
 
 sysconf = SysConf()
