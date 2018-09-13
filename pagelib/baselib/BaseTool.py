@@ -2,14 +2,21 @@
 # create by pengcheng
 
 from selenium import webdriver
+<<<<<<< Updated upstream
 from conf.EnvConf import sysconf as sc
 from pagelib.baselib import Logger
 import json
 from pagelib.baselib.html_logger import setup,info,err,dbg,warn
+=======
+from conf.EnvConf import sysconf as sc,logconf as lc
+from pagelib.baselib.HtmlLogger import info,err,dbg,warn,setup
+>>>>>>> Stashed changes
 
 
 class BaseTool(object):
 
+    def __init__(self):
+        setup(title=lc.title, version=lc.version, filename=lc.filename, mode=lc.mode, level=lc.level)
     driver = None
     def open_browser(self,url,msg=None):
         print(msg)
@@ -53,6 +60,14 @@ class BaseTool(object):
             self.driver.save_screenshot(filename)
         except:
             err("截图失败")
+<<<<<<< Updated upstream
+=======
+        else:
+            info("截图成功")
+            info('picshot_1'+filenameshot)
+            info("截图完成")
+
+>>>>>>> Stashed changes
 
     # 获取字典数据
     def get_data(self,data_dict,env=None):
