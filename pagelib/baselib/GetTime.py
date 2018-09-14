@@ -2,7 +2,7 @@
 # create by pengcheng
 import time
 import datetime
-
+from pagelib.baselib.HtmlLogger import log
 
 class GetTime(object):
 
@@ -52,4 +52,10 @@ class GetTime(object):
     # 获取当前年月日时分秒
     def get_ymdhm(self):
         return time.strftime('%Y%m%d%H%M', time.localtime(time.time()))
+    # 获取时间戳当文件名
+    def get_time_filename(self):
+        name = str(datetime.datetime.now()).replace(" ", "").replace(":", "").replace(".", "")
+        log.info("获取文件名成功："+name)
+        return  name
 
+gt = GetTime()

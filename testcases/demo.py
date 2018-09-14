@@ -2,17 +2,6 @@
 # create by pengcheng
 
 from pagelib.baselib.BaseTool import bt
-<<<<<<< Updated upstream
-from testdata.BaseData import bd
-class Demo(object):
-
-    bt.open_browser(bd.url(),"打开dop首页！")
-=======
-
-
-
-
-
 
 class Demo(object):
 
@@ -31,4 +20,3 @@ class Demo(object):
 
 
 
->>>>>>> Stashed changes
