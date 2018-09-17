@@ -39,13 +39,14 @@ class BaseTool(object):
                 log.error("打开IE浏览器失败")
         else:
             log.error("不支持的浏览器")
+        self.max_window()
         # 跳转到url
         self.get_url(url)
-        self.max_window()
+
 
     # 窗口最大化
     def max_window(self):
-        self.driver.maximize_window();
+        self.driver.maximize_window()
         log.info("窗口最大化")
 
     # 跳转到URL
@@ -68,7 +69,9 @@ class BaseTool(object):
     def pic_shot(self):
         try:
             # 截图保存路径
-            filepath ="../../"+lc.shot_path+str(gt.get_time_date())+"/"
+            filepath =op.get_project_path()+"/"+lc.shot_path+str(gt.get_time_date())+"/"
+            # 截图展示路径
+            showpath = lc.shot_show_path+str(gt.get_time_date())+"/"
             log.debug("截图路径：【"+filepath+"】")
             op.path_exists_create(filepath)
             # 截图名字
@@ -82,7 +85,7 @@ class BaseTool(object):
             log.error("截图失败")
         else:
             log.info("截图成功,截图存储路径为：【"+name+"】")
-            log.info("picshot_1"+name)
+            log.info("picshot_1"+showpath+filename)
 
     # 获取字典数据
     def get_data(self,data_dict,env=None):

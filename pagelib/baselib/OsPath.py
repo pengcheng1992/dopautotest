@@ -1,6 +1,5 @@
 # -*- coding:utf8 -*-
 # create by pengcheng
-from pagelib.baselib.HtmlLogger import log
 import os.path
 class OsPath(object):
     # 获取当前目录
@@ -18,7 +17,12 @@ class OsPath(object):
             try:
                 os.makedirs(path)
             except Exception:
-                log.error ("创建【"+path+"】目录失败")
+                raise ("创建【"+path+"】目录失败")
+
+    # 获取项目根目录
+    def get_project_path(self):
+        project_path =  os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        return project_path
 
 
 op = OsPath()

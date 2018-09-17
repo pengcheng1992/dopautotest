@@ -10,5 +10,6 @@ class LogConf(object):
     log_title = "测试用例"
     log_version = "DOP V3.21"
     shot_path = "screenshot/"
+    shot_show_path = "/dopautotest/screenshot/"
     shot_type = ".png"
 lc = LogConf()

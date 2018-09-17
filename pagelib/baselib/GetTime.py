@@ -47,7 +47,7 @@ class GetTime(object):
         elif d == 6:
             return '周日'
         else:
-            raise RuntimeError('获取周几出错')
+            log.error('获取周几出错')
 
     # 获取当前年月日时分秒
     def get_ymdhm(self):
