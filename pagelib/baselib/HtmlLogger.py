@@ -184,7 +184,7 @@ class HTMLLogger(logging.Logger):
         h.setFormatter(f)
         self.addHandler(h)
 
-
+log = HTMLLogger()
 
 
 
