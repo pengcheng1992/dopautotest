@@ -89,17 +89,18 @@ class BaseTool(HTMLLogger):
     # 获取字典数据
     def get_data(self,data_dict,env=None):
         # 根据环境取数据
+
         if env == None and sc.env in sc.envlist:
             try:
                 value = data_dict.get(sc.env)
-                self.debug("获取到的数据为：\n"+value)
+                self.debug("获取到的数据为："+str(value))
                 return value
-            except:
+            except Exception:
                 self.error("不支持的数据格式，请使用python字典格式！")
         elif env !=None and env in sc.envlist:
             try:
                 value = data_dict.get(env)
-                self.debug("获取到的数据为：\n" + value)
+                self.debug("获取到的数据为："+str(value))
                 return value
             except:
                 self.error("不支持的数据格式，请使用python字典格式！")
@@ -107,4 +108,3 @@ class BaseTool(HTMLLogger):
             self.error("环境配置不正确，请检查环境配置，仅支持【qa】、【yz】、【prod】三种环境！")
 
 
-bt = BaseTool()

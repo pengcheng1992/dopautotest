@@ -155,7 +155,7 @@ class HTMLLogger(logging.Logger):
     file stream handler.
     """
 
-    def __init__(self, name=lc.logger_name,level=logging.DEBUG,filename= None, mode='w',title=lc.log_title, version=lc.log_version):
+    def __init__(self, name=lc.logger_name,level=lc.log_level,filename= lc.file_name, mode=lc.mode,title=lc.log_title, version=lc.log_version):
 
         super().__init__(name, level)
         # 如果创建实例没有传路径，则使用项目下的testlog路径
@@ -184,7 +184,7 @@ class HTMLLogger(logging.Logger):
         h.setFormatter(f)
         self.addHandler(h)
 
-log = HTMLLogger()
+
 
 
 
