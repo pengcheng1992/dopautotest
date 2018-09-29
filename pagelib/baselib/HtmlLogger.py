@@ -32,22 +32,24 @@ padding : 5px;
 margin: 5px;
 background-color : #292929;
 display:inline-block;
-*display:inline;
-*zoom:1;
 }
 .err {
 color: #EE1100;
 font-weight: bold
+max-width:1800px;
 }
 .warn {
 color: #FFCC00;
 font-weight: bold
+max-width:1800px;
 }
 .info {
 color: #C0C0C0;
+max-width:1800px;
 }
 .debug {
 color: #CCA0A0;
+max-width:1800px;
 }
 img{
 max-width:800px;
@@ -71,6 +73,12 @@ _END_OF_DOC_FMT = """</table>
 _MSG_FMT = """
 <tr>
 <td class="%(class)s" ><pre>%(msg)s</pre></td>
+<tr>
+"""
+
+_STEP_MSG_FMT = """
+<tr>
+<td style="font-weight:bold" class="%(class)s" ><font color="green"><pre>%(msg)s</pre></font></td>
 <tr>
 """
 
@@ -122,10 +130,11 @@ class HTMLFormatter(logging.Formatter):
 
         # handle '<' and '>' (typically when logging %r)
         msg = record.msg
-        msg = msg.replace("<", "&#60")
-        msg = msg.replace(">", "&#62")
+        if msg is not None:
+            msg = msg.replace("<", "&#60")
+            msg = msg.replace(">", "&#62")
         record.message = record.msg
-        if msg.startswith("picshot_1") :
+        if msg is not None and msg.startswith("picshot_1"):
             msg = msg.replace("picshot_1","")
             return _PIC_FMT % {"class": class_name,"picsrc": msg,"alt":"用例失败截图"}
         else:
@@ -145,7 +154,8 @@ class HTMLFormatter(logging.Formatter):
                 if s[-1:] != "\n":
                     s = s + "\n"
                 s = s + self.formatStack(record.stack_info)
-
+            if s is not None and "step" in str(s).lower():
+                return _STEP_MSG_FMT % {"class": class_name, "msg": s}
             return _MSG_FMT % {"class": class_name,"msg": s}
 
 

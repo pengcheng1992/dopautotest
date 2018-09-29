@@ -7,6 +7,7 @@ class PushStrategyObj(object):
     strategy_name_alert = "//div[contains(text(), '策略未推送成功')]"      #过期时长备注解释
     strategy_crowd = "//label[contains(text(),'所属用户群')]/following-sibling::*/div"       #所属用户群下拉框
     remarks = "//label[text()='备注']//following-sibling::*"      #备注输入框
+    percent_name = "//input[@ng-reflect-name='groupName']"      #分组名称
     user_percent = "//input[@formcontrolname = 'percentage']"       #分组比例输入框
     push_frequency = "//label[text()=' 推送频率']//following-sibling::*/div"        #推送频率下拉框
     save_strategy = "//div[@class = 'form-group form-group-inline pt-3']/section/button[@class='btn btn-primary']"      #保存按钮
@@ -18,11 +19,11 @@ class PushStrategyObj(object):
     alert_determine = "//button[text() = '确定']"     #弹框确定按钮
     alert_cancel = "//button[text() = '取消']"        #弹框取消按钮
     verify_strategy_success = "//a[text() = 'ceshicelve1']"
-    verify_strategy_content_binding = "//span[contains(@class , 'text-danger') and contains(text(),'内容')]"
-    verify_push_time = "//div[contains(@class,'alert-danger') and contains(text(),'日期')]"
-    verify_percent = "//div[contains(@class , 'alert-danger') and contains(text(),'比例')]"
-    verify_strategy_name = "//div[contains(@class , 'alert-danger') and contains(text(),'名称')]"
-    content_id = "//div[contains(@class ,'phx-input phx-input-primary')]/label[contains(text(),'"
+    verify_strategy_content_binding = "//span[contains(@class , 'text-danger') and contains(text(),'内容')]"   #绑定内容提示信息
+    verify_push_time = "//div[contains(@class,'alert-danger') and contains(text(),'日期')]"      #推送时间提示提示信息
+    verify_percent = "//div[contains(@class , 'alert-danger') and contains(text(),'比例')]"      #分组比例提示信息
+    verify_strategy_name = "//div[contains(@class , 'alert-danger') and contains(text(),'名称')]"     #策略名称提示信息
+    content_id = "//div[contains(@class ,'phx-input phx-input-primary')]/label[contains(text(),'"   #内容ID
     binding_content_determine = "//button[text() = '确定']"
     cancel_binding = "//phx-table-cell[text()='630']/following-sibling::*//a[text() = '解绑']"
     onetime_push = "//label[contains(text(),'一次推送完成')]"
@@ -45,28 +46,28 @@ class Monthly(object):
     push_date = "//label[text()=' 推送时间']//following-sibling::*//span[text()='1日']"
     current_day = "//phx-select-option[text()='" + str(GetTime().get_time_day()) + "日']"
     push_time = "//label[text()=' 推送时间']//following-sibling::*//span[text()='08']"
-    current_time = "//phx-select-option[text()='" + str(GetTime().get_time_hour() - 1) + "']"
+    hour_time = str(GetTime().get_time_hour() - 1)
+    if len(hour_time)<2:hour_time='0'+hour_time
+    current_time = "//phx-select-option[text()='" + hour_time + "']"
     push_minute = "//label[text()=' 推送时间']//following-sibling::*//span[text()='00']"
     thirty_minute = "//phx-select-option[text()='30']"
 
 class Disposable(object):
     disposable = "//phx-select-option[text()='一次性']"
     push_date = "//label[text()=' 推送时间']//following-sibling::*//div[@class ='phx-datepicker-trigger-input']"
-    push_year = "//div[@class ='phx-calendar-control-dropdown-content']/span[text()='" + str(
-        GetTime().get_time_year()) + "']"
-    push_month = "//div[@class ='phx-calendar-control-dropdown-content']/span[text()='" + str(
-        GetTime().get_time_month()) + "']"
-    date = "//div[@data = '" + str(GetTime().get_time_stamp()) + "']"
-    year = "//div[contains(@class,'phx-calendar-control-dropdown-option') and contains(text(),' " + str(
-        GetTime().get_time_year()) + "\n')]"
-    month = "//div[contains(@class,'phx-calendar-control-dropdown-option') and contains(text(),' " + str(
-        GetTime().get_time_month()) + "\n')]"
-    push_year_verify = "//div[@class ='phx-calendar-control-dropdown-content']/span[text()='" + str(
-        GetTime().get_time_year() + 1) + "']"
+    push_year = "//div[@class ='phx-calendar-control-dropdown-content']/span[text()='"+str(GetTime().get_time_year())+"']"
+    push_month = "//div[@class ='phx-calendar-control-dropdown-content']/span[text()='"+str(GetTime().get_time_month())+"']"
+    date = "//div[@data = '" + str(GetTime().get_time_stamp())+"']"
+    year = "//div[contains(@class,'phx-calendar-control-dropdown-option') and contains(text(),' "+str(GetTime().get_time_year())+"')]"
+    month = "//div[contains(@class,'phx-calendar-control-dropdown-option') and contains(text(),' "+str(GetTime().get_time_month())+"')]"
+    push_year_verify = "//div[@class ='phx-calendar-control-dropdown-content']/span[text()='" + str(GetTime().get_time_year() + 1) + "']"
 
     # 点击确定按钮后修改时间
 
 class Modify(object):
-    modify_push_time = "//label[text()=' 推送时间']//following-sibling::*//span[text()='" + str(
-        GetTime().get_time_hour() - 1) + "']"
-    push_ok_time = "//phx-select-option[text()='" + str(GetTime().get_time_hour() + 1) + "']"
+    hour_time =  str(GetTime().get_time_hour() + 1)
+    if len(hour_time) < 2: hour_time = '0' + hour_time
+    modify_push_time = "//label[text()=' 推送时间']//following-sibling::*//span[text()='" + Monthly.hour_time + "']"
+    push_ok_time = "//phx-select-option[text()='" + hour_time + "']"
+
+pushstrategy = PushStrategyObj()

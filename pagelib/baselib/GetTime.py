@@ -8,7 +8,7 @@ class GetTime(object):
     # 获取当天凌晨的时间戳
     def get_time_stamp(self):
         t = time.localtime(time.time())
-        return time.mktime(time.strptime(time.strftime('%Y-%m-%d 00:00:00', t), '%Y-%m-%d %H:%M:%S')) * 1000
+        return int(time.mktime(time.strptime(time.strftime('%Y-%m-%d 00:00:00', t), '%Y-%m-%d %H:%M:%S')) * 1000)
     # 获取当前年份
     def get_time_year(self):
         return datetime.datetime.now().year

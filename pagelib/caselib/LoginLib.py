@@ -13,7 +13,7 @@ class LoginLib(object):
         pucom.click_if_exist(loginobj.login_chose_up)
         pucom.set_value(loginobj.username_input,ld.userinfo()["username"])
         pucom.set_value(loginobj.password_input,ld.userinfo()["password"])
-        pucom.click_if_exist(loginobj.login_button,1)
+        pucom.click_if_exist(loginobj.login_button)
         pucom.info("判断是否登录成功")
 
     def verify_UserName(self,msg=None):
