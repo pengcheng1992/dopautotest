@@ -61,7 +61,7 @@ class BaseApi(object):
     # 获取回参中message
     def get_response_message(self):
         if self.response:
-            return json.loads(self.response.text)['msg']
+            return json.loads(self.response.text)['message']
 
     # 所有接口共有的入参，比如：app_version、token等
     def build_base_param(self):
